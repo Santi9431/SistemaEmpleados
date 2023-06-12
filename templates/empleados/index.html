@@ -1,0 +1,54 @@
+
+
+<br>
+{% include 'header.html' %}
+    <br>
+    <br>
+    <br>
+     
+    <a href="{{url_for('create')}} " class="btn btn-success">
+
+        Ingresar nuevo empleado
+
+    </a>    
+
+    <br>  
+    <table class="table table-light">
+        <thead class="thead-light">
+            <tr>
+                <th>#</th>
+                <th>Foto</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Accciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for empelado in empleados  %}
+<!-- Esto hace referencia a que en la BaseData esta por indice empezando desde 0
+y tenemos 3 columnas , etnonces tienen que ser en el orden que lo pusiste 
+en la etiqueta <tr/>  -->
+            
+            <tr>
+                <td>{{empelado[0] }}</td>
+
+                <td>
+                    <img class="img-thumbnail" width="100" src="uploads/{{empelado[3] }}" alt="">
+                   
+                </td>
+                
+                <td>{{empelado[1] }}</td>
+                <td>{{empelado[2] }}</td>
+                <td>
+                    <!-- utilizamos la etiqueta <a/> para enrutar el indice que va a coger la funcion borrar -->
+                    <a class="btn btn-primary" href="/edit/{{empelado[0] }}">Editar</a>
+
+                    |
+                    <a onclick="return confirm('¿ Desea borrar el registro?')" class="btn btn-danger" href="/destroy/{{empelado[0] }}">Borrar</a>
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+{% include 'footer.html' %}
